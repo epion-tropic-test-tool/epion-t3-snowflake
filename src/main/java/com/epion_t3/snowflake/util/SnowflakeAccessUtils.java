@@ -62,7 +62,7 @@ public final class SnowflakeAccessUtils {
     }
 
     public IDatabaseConnection getDatabaseConnection(SnowflakeConnectionConfiguration snowflakeConnectionConfiguration,
-                                                     DataSource dataSource) {
+            DataSource dataSource) {
 
         if (StringUtils.isEmpty(snowflakeConnectionConfiguration.getRdbKind())) {
             throw new SystemException(SnowflakeMessages.SNOWFLAKE_ERR_9013);
@@ -80,7 +80,8 @@ public final class SnowflakeAccessUtils {
             }
             DatabaseConfig configSnowflake = conn.getConfig();
             configSnowflake.setProperty(DatabaseConfig.PROPERTY_DATATYPE_FACTORY, new OracleDataTypeFactory());
-            configSnowflake.setProperty(DatabaseConfig.PROPERTY_METADATA_HANDLER, new SnowflakeMetadataHandler(snowflakeConnectionConfiguration.getDbName()));
+            configSnowflake.setProperty(DatabaseConfig.PROPERTY_METADATA_HANDLER,
+                    new SnowflakeMetadataHandler(snowflakeConnectionConfiguration.getDbName()));
             return conn;
         } catch (SQLException e) {
             throw new SystemException(SnowflakeMessages.SNOWFLAKE_ERR_9015);
