@@ -1,0 +1,174 @@
+t3: 1.0
+#####################################
+# 対象言語
+#####################################
+languages:
+  - ja_JP
+#####################################
+# カスタム機能定義
+#####################################
+info:
+  name: snowflake
+  customPackage: com.epion_t3.snowflake
+  summary:
+    - lang: ja_JP
+      contents: "Snowflakeに対するアクセス機能を提供します。"
+  description:
+    - lang: ja_JP
+      contents: "Snowflakeに対するアクセス機能を提供します。"
+#####################################
+# コマンド定義
+#####################################
+commands:
+  ##########################
+  # ExecuteSnowflakeScript
+  ##########################
+  - id: ExecuteSnowflakeScript
+    summary:
+      - lang: ja_JP
+        contents: "Snowflakeに対してスクリプト（SQL）を実行します。"
+    testItem:
+      - order: 1
+        summary:
+          - lang: ja_JP
+            contents: "Snowflake「${snowflakeConnectConfigRef}」に対して「${value}」を実行します。"
+    function:
+      - order: 1
+        summary:
+          - lang: ja_JP
+            contents: "Snowflakeに対してスクリプト（SQL）を実行します。"
+      - order: 2
+        summary:
+          - lang: ja_JP
+            contents: "スクリプト（SQL）へETTTの変数バインドが可能です。"
+      - order: 3
+        summary:
+          - lang: ja_JP
+            contents: "スクリプト（SQL）はUTF-8で読み込みます。"
+    structure:
+      - order: 1
+        name: id
+        required: true
+        type: string
+        summary:
+          - lang: ja_JP
+            contents: コマンドのID
+      - order: 2
+        name: command
+        required: true
+        type: string
+        summary:
+          - lang: ja_JP
+            contents: 「ExecuteSnowflakeScript」固定
+      - order: 3
+        name: summary
+        required: false
+        type: string
+        summary:
+          - lang: ja_JP
+            contents: コマンドの概要（任意）
+      - order: 4
+        name: description
+        required: false
+        type: string
+        summary:
+          - lang: ja_JP
+            contents: コマンドの詳細（任意）
+      - order: 5
+        name: snowflakeConnectConfigRef
+        required: true
+        type: string
+        summary:
+          - lang: ja_JP
+            contents: "Snowflakeに対する接続先定義の参照ID # (1)"
+        description:
+          - lang: ja_JP
+            contents: "Snowflakeへの接続先の設定を行っている `Configuration` の参照IDを指定します。"
+      - order: 6
+        name: value
+        required: true
+        type: string
+        summary:
+          - lang: ja_JP
+            contents: "スクリプト（SQL）のパス（相対パス）"
+#####################################
+# メッセージ定義
+#####################################
+messages:
+  - id: com.epion_t3.snowflake.err.9001
+    message:
+      - lang: ja_JP
+        contents: "Queryが指定されていません."
+  - id: com.epion_t3.snowflake.err.9002
+    message:
+      - lang: ja_JP
+        contents: "Queryの実行時にエラーが発生しました."
+  - id: com.epion_t3.snowflake.err.9003
+    message:
+      - lang: ja_JP
+        contents: "Scriptのパスが指定されていません."
+  - id: com.epion_t3.snowflake.err.9004
+    message:
+      - lang: ja_JP
+        contents: "Scriptのパスが存在しません.パス：{0}"
+  - id: com.epion_t3.snowflake.err.9005
+    message:
+      - lang: ja_JP
+        contents: "DataSetのパスが指定されていません."
+  - id: com.epion_t3.snowflake.err.9006
+    message:
+      - lang: ja_JP
+        contents: "DataSetのパスが存在しません.パス：{0}"
+  - id: com.epion_t3.snowflake.err.9007
+    message:
+      - lang: ja_JP
+        contents: "DataSetの種別が解決できません.種別：{0}"
+  - id: com.epion_t3.snowflake.err.9008
+    message:
+      - lang: ja_JP
+        contents: "CSVによるDataSetには現状対応していません."
+  - id: com.epion_t3.snowflake.err.9009
+    message:
+      - lang: ja_JP
+        contents: "インポート用のオペレーションではありません.オペレーション：{0}"
+  - id: com.epion_t3.snowflake.err.9010
+    message:
+      - lang: ja_JP
+        contents: "DataSetのインポートに失敗しました."
+  - id: com.epion_t3.snowflake.err.9011
+    message:
+      - lang: ja_JP
+        contents: "Snowflakeアクセスに失敗したため、DataSetのエクスポートに失敗しました."
+  - id: com.epion_t3.snowflake.err.9012
+    message:
+      - lang: ja_JP
+        contents: "Snowflakeへの接続先定義は必須です."
+  - id: com.epion_t3.snowflake.err.9013
+    message:
+      - lang: ja_JP
+        contents: "Snowflakeへの接続先定義のSnowflake種別は必須です."
+  - id: com.epion_t3.snowflake.err.9014
+    message:
+      - lang: ja_JP
+        contents: "Snowflakeへの接続先定義のSnowflake種別が不正です.対応するSnowflakeの値を設定してください.Snowflake種別：{0}"
+  - id: com.epion_t3.snowflake.err.9015
+    message:
+      - lang: ja_JP
+        contents: "Snowflakeへのコネクションの確率に失敗しました."
+  - id: com.epion_t3.snowflake.err.9016
+    message:
+      - lang: ja_JP
+        contents: "DataSetの読み込みに失敗しました.パス：{0}"
+  - id: com.epion_t3.snowflake.err.9017
+    message:
+      - lang: ja_JP
+        contents: "期待値のDataSetのパスが指定されていません."
+  - id: com.epion_t3.snowflake.err.9018
+    message:
+      - lang: ja_JP
+        contents: "結果値を参照するためのFlowIDが指定されていません."
+  - id: com.epion_t3.snowflake.err.9019
+    message:
+      - lang: ja_JP
+        contents: "カラムの型が解決できません.テーブル：{0},カラム：{1}"
+
