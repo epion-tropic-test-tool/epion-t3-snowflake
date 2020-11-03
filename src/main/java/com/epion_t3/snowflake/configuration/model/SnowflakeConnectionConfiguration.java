@@ -13,7 +13,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-@CustomConfigurationDefinition(id = "RdbConnectionConfiguration")
+@CustomConfigurationDefinition(id = "SnowflakeConnectionConfiguration")
 public class SnowflakeConnectionConfiguration extends Configuration {
 
     /**
@@ -45,5 +45,10 @@ public class SnowflakeConnectionConfiguration extends Configuration {
      * RDB種別.
      */
     private String rdbKind;
+
+    /**
+     * データベース名.
+     */
+    private String dbName;
 
 }

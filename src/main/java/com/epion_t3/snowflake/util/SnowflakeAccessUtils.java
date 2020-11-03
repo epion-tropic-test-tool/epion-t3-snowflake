@@ -10,6 +10,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.dbunit.database.DatabaseConfig;
 import org.dbunit.database.DatabaseDataSourceConnection;
 import org.dbunit.database.IDatabaseConnection;
+import org.dbunit.ext.oracle.OracleDataTypeFactory;
 
 import javax.sql.DataSource;
 import java.sql.SQLException;
@@ -60,14 +61,14 @@ public final class SnowflakeAccessUtils {
         return getDatabaseConnection(rdbConnectionConfiguration, dataSource);
     }
 
-    public IDatabaseConnection getDatabaseConnection(SnowflakeConnectionConfiguration rdbConnectionConfiguration,
-            DataSource dataSource) {
+    public IDatabaseConnection getDatabaseConnection(SnowflakeConnectionConfiguration snowflakeConnectionConfiguration,
+                                                     DataSource dataSource) {
 
-        if (StringUtils.isEmpty(rdbConnectionConfiguration.getRdbKind())) {
+        if (StringUtils.isEmpty(snowflakeConnectionConfiguration.getRdbKind())) {
             throw new SystemException(SnowflakeMessages.SNOWFLAKE_ERR_9013);
         }
 
-        String schema = rdbConnectionConfiguration.getSchema();
+        String schema = snowflakeConnectionConfiguration.getSchema();
 
         IDatabaseConnection conn = null;
 
@@ -77,8 +78,9 @@ public final class SnowflakeAccessUtils {
             } else {
                 conn = new DatabaseDataSourceConnection(dataSource);
             }
-            DatabaseConfig configOracle = conn.getConfig();
-//            configOracle.setProperty(DatabaseConfig.PROPERTY_DATATYPE_FACTORY, new OracleDataTypeFactory());
+            DatabaseConfig configSnowflake = conn.getConfig();
+            configSnowflake.setProperty(DatabaseConfig.PROPERTY_DATATYPE_FACTORY, new OracleDataTypeFactory());
+            configSnowflake.setProperty(DatabaseConfig.PROPERTY_METADATA_HANDLER, new SnowflakeMetadataHandler(snowflakeConnectionConfiguration.getDbName()));
             return conn;
         } catch (SQLException e) {
             throw new SystemException(SnowflakeMessages.SNOWFLAKE_ERR_9015);
