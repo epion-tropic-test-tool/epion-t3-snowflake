@@ -9,6 +9,7 @@ languages:
 #####################################
 info:
   name: snowflake
+  labelName: Snowflake
   customPackage: com.epion_t3.snowflake
   summary:
     - lang: ja_JP
@@ -28,8 +29,10 @@ configurations:
       - lang: ja_JP
         contents: "Snowflake接続先設定です。"
     description:
-      - lang: ja_JP
-        contents: "SnowflakeのJDBC接続を行う際に必要な情報を定義します。"
+      - order: 1
+        summary:
+          - lang: ja_JP
+            contents: "SnowflakeのJDBC接続を行う際に必要な情報を定義します。"
     structure:
       - order: 1
         name: configuration
@@ -175,7 +178,7 @@ commands:
             contents: "Snowflakeに対する接続先定義の参照ID # (1)"
         description:
           - lang: ja_JP
-            contents: "Snowflakeへの接続先の設定を行っている `Configuration` の参照IDを指定します。"
+            contents: "Snowflakeへの接続先の設定を行っている `SnowflakeConnectionConfiguration` の参照IDを指定します。"
       - order: 6
         name: value
         required: true
@@ -246,7 +249,7 @@ commands:
             contents: "Snowflakeに対する接続先定義の参照ID # (1)"
         description:
           - lang: ja_JP
-            contents: "Snowflakeへの接続先の設定を行っている `Configuration` の参照IDを指定します。"
+            contents: "Snowflakeへの接続先の設定を行っている `SnowflakeConnectionConfiguration` の参照IDを指定します。"
       - order: 6
         name: value
         required: true

@@ -1,4 +1,7 @@
-#  Command
+# Snowflake カスタム機能ドキュメント
+
+このドキュメントは、Snowflake のカスタム機能が提供する、
+Flow、コマンド、設定定義についての説明及び出力するメッセージの定義について説明する。
 
 - Contents
   - [Information](#Information)
@@ -8,8 +11,10 @@
   - [Configuration List](#Configuration-List)
   - [Message List](#Message-List)
 
-
 ## Information
+
+本カスタム機能の基本情報は以下の通り。
+
 Snowflakeに対するアクセス機能を提供します。
 
 - Name : `snowflake`
@@ -20,11 +25,20 @@ Snowflakeに対するアクセス機能を提供します。
 
 ## Flow List
 
+本カスタム機能が提供するFlowの一覧及び詳細。
+
+|Name|Summary|
+|:---|:---|
+
+
 ## Command List
+
+本カスタム機能が提供するコマンドの一覧及び詳細。
 
 |Name|Summary|Assert|Evidence|
 |:---|:---|:---|:---|
 |[ExecuteSnowflakeScript](#ExecuteSnowflakeScript)|Snowflakeに対してスクリプト（SQL）を実行します。  |||
+|[ExecuteSnowflakeScriptQuery](#ExecuteSnowflakeScriptQuery)|Snowflakeに対してスクリプト（SQL）を実行します。  |||
 
 ------
 
@@ -51,13 +65,70 @@ commands :
 
 ```
 
-1. Snowflakeへの接続先の設定を行っている &#96;Configuration&#96; の参照IDを指定します。
+1. Snowflakeへの接続先の設定を行っている &#96;SnowflakeConnectionConfiguration&#96; の参照IDを指定します。
+------
+
+### ExecuteSnowflakeScriptQuery
+Snowflakeに対してスクリプト（SQL）を実行します。
+#### Command Type
+- Assert : No
+- Evidence : No
+
+#### Functions
+- Snowflakeに対してスクリプト（SQL）を実行します。
+- スクリプト（SQL）へETTTの変数バインドが可能です。
+- スクリプト（SQL）はUTF-8で読み込みます。
+
+#### Structure
+```yaml
+commands : 
+  id : コマンドのID
+  command : 「ExecuteSnowflakeScriptQuery」固定
+  summary : コマンドの概要（任意）
+  description : コマンドの詳細（任意）
+  snowflakeConnectConfigRef : Snowflakeに対する接続先定義の参照ID # (1)
+  value : スクリプト（SQL）のパス（相対パス）
+
+```
+
+1. Snowflakeへの接続先の設定を行っている &#96;SnowflakeConnectionConfiguration&#96; の参照IDを指定します。
 
 ## Configuration List
 
+本カスタム機能が提供する設定定義の一覧及び詳細。
+
+|Name|Summary|
+|:---|:---|
+|[SnowflakeConnectionConfiguration](#SnowflakeConnectionConfiguration)|Snowflake接続先設定です。  |
+
+------
+
+### SnowflakeConnectionConfiguration
+Snowflake接続先設定です。
+#### Description
+- SnowflakeのJDBC接続を行う際に必要な情報を定義します。
+
+#### Structure
+```yaml
+commands : 
+  configuration : 「SnowflakeConnectionConfiguration」固定
+  id : 設定のID
+  summary : 設定の概要（任意）
+  description : 設定の詳細（任意）
+  driverClassName : Snowflake接続用のJDBCドライバーのクラス名（FQCN）
+  url : Snowflake接続用のJDBCのURL
+  username : Snowflake接続用のユーザー
+  password : Snowflake接続用のパスワード
+  schema : Snowflakeの接続スキーマ
+  rdbKind : 「snowflake」固定
+  dbName : Snowflakeの接続データベース
+
+```
+
+
 ## Message List
 
- Command output messages.
+本カスタム機能が出力するメッセージの一覧及び内容。
 
 |MessageID|MessageContents|
 |:---|:---|
