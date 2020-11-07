@@ -37,9 +37,39 @@ Snowflakeに対するアクセス機能を提供します。
 
 |Name|Summary|Assert|Evidence|
 |:---|:---|:---|:---|
+|[ExportSnowflakeData](#ExportSnowflakeData)|Snowflakeのデータを抽出（エクスポート）します。エクスポートしたデータはエビデンスとしても保存可能になります。  ||X|
 |[ExecuteSnowflakeScript](#ExecuteSnowflakeScript)|Snowflakeに対してスクリプト（SQL）を実行します。  |||
 |[ExecuteSnowflakeScriptQuery](#ExecuteSnowflakeScriptQuery)|Snowflakeに対してスクリプト（SQL）を実行します。  |||
 
+------
+
+### ExportSnowflakeData
+Snowflakeのデータを抽出（エクスポート）します。エクスポートしたデータはエビデンスとしても保存可能になります。
+#### Command Type
+- Assert : No
+- Evidence : __Yes__
+
+#### Functions
+- Snowflakeのデータを抽出（エクスポート）します。
+- XMLで定義されたデータのエクスポートが行えます。（DBUnit）
+- Excelで定義されたデータのエクスポートが行えます。（DBUnit）
+
+#### Structure
+```yaml
+commands : 
+  id : コマンドのID
+  command : 「ExportSnowflakeData」固定
+  summary : コマンドの概要（任意）
+  description : コマンドの詳細（任意）
+  snowflakeConnectConfigRef : Snowflakeに対する接続先定義の参照ID # (1)
+  dataSetType : (xml|flatXml|excel) # (2)
+  tables : エクスポート対象のテーブルを定義 # (3)
+
+```
+
+1. RDBへの接続先の設定を行っている &#96;SnowflakeConnectionConfiguration&#96; の参照IDを指定します。
+1. DataSetの種類を指定します。DataSetとは、Snowflakeのデータ構造を表したもので、DataSetには、CSV、XML、Excelの形式が選べます。本コマンドが利用するDataSetとはすべてDBUnitのDataSetを指します。現状では、CSVには対応ができておりません。
+1. エクスポートを行う対象のテーブルについて細かく指定が行えます。
 ------
 
 ### ExecuteSnowflakeScript

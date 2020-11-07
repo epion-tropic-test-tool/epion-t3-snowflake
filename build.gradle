@@ -47,6 +47,7 @@ dependencies {
 
     // Core Library
     api group: 'com.epion_t3', name: 'epion-t3-core', version: '0.0.2'
+    api group: 'com.epion_t3', name: 'epion-t3-rdb', version: '0.0.2'
 
     // Add Library
     implementation 'org.dbunit:dbunit:2.6.0'
