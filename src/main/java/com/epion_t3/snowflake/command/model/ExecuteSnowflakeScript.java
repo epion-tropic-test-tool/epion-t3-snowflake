@@ -9,7 +9,7 @@ import lombok.Setter;
 import org.apache.bval.constraints.NotEmpty;
 
 /**
- * RDBに対するスクリプト（SQLファイル）を実行するコマンド処理.
+ * Snowflakeに対するスクリプト（SQLファイル）を実行するコマンド処理.
  *
  * @author Nozomu Takashima
  */
@@ -19,7 +19,7 @@ import org.apache.bval.constraints.NotEmpty;
 public class ExecuteSnowflakeScript extends Command {
 
     /**
-     * RDB接続設定参照.
+     * Snowflake接続設定参照.
      */
     @NotEmpty
     private String snowflakeConnectConfigRef;

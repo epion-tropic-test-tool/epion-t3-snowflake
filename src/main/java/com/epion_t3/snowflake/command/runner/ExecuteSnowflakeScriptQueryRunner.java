@@ -19,11 +19,12 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
- * RDBに対してスクリプト（SQL）実行処理．
+ * Snowflakeに対してスクリプト（SQL）実行処理．
  *
  * @author Nozomu Takashima
  */
@@ -78,9 +79,9 @@ public class ExecuteSnowflakeScriptQueryRunner extends AbstractCommandRunner<Exe
         try (Connection conn = dataSource.getConnection()) {
             for (String q : queries) {
                 if (StringUtils.isNotEmpty(q)) {
-                    try (Statement statement = conn.createStatement()) {
+                    try (PreparedStatement statement = conn.prepareStatement(q)) {
                         log.trace("execute query -> {}", q);
-                        statement.executeQuery(q);
+                        statement.execute();
                     }
                 }
             }
